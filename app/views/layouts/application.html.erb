@@ -22,7 +22,7 @@
 	</div>
 
 	<div id='canvas'>
-		<h1>Yesterday's REPOS!</h1>
+		<h2>Yesterday's REPOS!</h2>
 		<div id='container'>
 		</div>	
 	</div>
@@ -41,7 +41,7 @@
     		.style("background", "white")
     		.style("border", 'solid 5px grey');
 
-		svg.selectAll("circle")
+		svg.selectAll("node")
 			.data(array)
 			.enter()
 			.append("circle")
@@ -52,7 +52,9 @@
 			.attr('r', function(d){
 				return d * 1
 			})
-			.attr('fill', 'purple');
+			.attr('fill', 'purple')
+			.insert("<p>hello</p>");
+
 
 	</script>
 
