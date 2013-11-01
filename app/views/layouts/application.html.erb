@@ -33,26 +33,41 @@
   	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 
 	<script>
+		// var data;
+
+		$.getJSON("/get_fork_day/date", function(data) {
+			var array = data.repos
+			var svg = d3.select("#container").append("svg")
+	    		.attr("width", 1000)
+	    		.attr("height", 500)
+	    		.style("background", "white")
+	    		.style("border", 'solid 5px grey');
+
+			svg.selectAll("circle")
+				.data(array)
+				.enter()
+				.append("circle")
+				.attr('cy', function(d) {
+					return d.total_forks / (Math.random() * 4)
+				})
+				.attr('cx', function(d){
+					return d.total_forks / (Math.random() * 4)
+				})
+				.attr('r', function(d){
+					return d.forked_today * 2
+				})
+
+				.attr('fill', 'purple')
+				.append('text')
+				.text(function(d) {return d.name} )
+				.attr("dy", ".3em")
+      			.style("text-anchor", "middle")
+      			.style("color", "black");
+		})
+
 		var array = [10, 5, 100];
 
-		var svg = d3.select("#container").append("svg")
-    		.attr("width", 1000)
-    		.attr("height", 500)
-    		.style("background", "white")
-    		.style("border", 'solid 5px grey');
-
-		svg.selectAll("circle")
-			.data(array)
-			.enter()
-			.append("circle")
-			.attr('cy', 100)
-			.attr('cx', function(d){
-				return d * 5
-			})
-			.attr('r', function(d){
-				return d * 1
-			})
-			.attr('fill', 'purple');
+		
 
 	</script>
 
