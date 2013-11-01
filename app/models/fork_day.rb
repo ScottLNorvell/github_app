@@ -1,6 +1,6 @@
 class ForkDay
   include Mongoid::Document
-  field :date, type: Time
+  field :date, type: String
 
   embeds_many :repos
 end
