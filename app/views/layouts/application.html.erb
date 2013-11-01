@@ -3,10 +3,24 @@
 <head>
   <title>GithubGraph</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<script id="app-view-template" type="text/x-handlebars-template">
+  
+  		<h3>want to know</h3>
+  		<h1>THE MOST POPULAR GITHUB REPOS?</h1>
+  		<a href='#'></a>
+
+	</script>
+
+<!-- This will be our main container -->
+<div id="main">
+</div>
+
 	<%= yield %>
+
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 </body>
 </html>
