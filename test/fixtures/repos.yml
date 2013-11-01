@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  forked_today: 1
+  name: MyString
+  repo_url: MyString
+  total_forks: 1
+  language: MyString
+
+two:
+  forked_today: 1
+  name: MyString
+  repo_url: MyString
+  total_forks: 1
+  language: MyString
