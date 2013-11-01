@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>GithubGraph</title>
+  <link href='http://fonts.googleapis.com/css?family=Rambla' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 
   <%= csrf_meta_tags %>
@@ -10,17 +11,51 @@
 	<script id="app-view-template" type="text/x-handlebars-template">
   
   		<h3>want to know</h3>
-  		<h1>THE MOST POPULAR GITHUB REPOS?</h1>
-  		<a href='#'></a>
+  		<h2>THE MOST POPULAR</h2> 
+  		<h1>GITHUB REPOS?</h1>
+  		<a href='{{url}}'><img src='{{image}}' id='octocat'></a>
 
 	</script>
 
-<!-- This will be our main container -->
-<div id="main">
-</div>
+	<!-- This will be our main container -->
+	<div id="main">
+	</div>
+
+	<div id='canvas'>
+		<h1>Yesterday's REPOS!</h1>
+		<div id='container'>
+		</div>	
+	</div>
+
 
 	<%= yield %>
 
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
+	<script>
+		var array = [10, 5, 100];
+
+		var svg = d3.select("#container").append("svg")
+    		.attr("width", 1000)
+    		.attr("height", 500)
+    		.style("background", "white")
+    		.style("border", 'solid 5px grey');
+
+		svg.selectAll("circle")
+			.data(array)
+			.enter()
+			.append("circle")
+			.attr('cy', 100)
+			.attr('cx', function(d){
+				return d * 5
+			})
+			.attr('r', function(d){
+				return d * 1
+			})
+			.attr('fill', 'purple');
+
+	</script>
+
+
 </body>
 </html>
