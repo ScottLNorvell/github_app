@@ -20,7 +20,8 @@
 //= require d3
 //= require_tree .
 
-var data;
+var data,
+    date; 
 
 function mainPageLoad() {
     $('.title').addClass('animated bounceInDown');
@@ -38,6 +39,13 @@ function animateCanvasIn() {
     $('#main').hide();
     $('#canvas').show();
     loadGraph();
+}
+
+function changeDate() {
+    // var date = $('select').val();
+    var newdate = new Date();
+    date = newdate.toLocaleDateString().split('/')[2] + '-' + newdate.toLocaleDateString().split('/')[0] + '-' + newdate.toLocaleDateString().split('/')[1];
+    animateCanvasIn();
 }
 
 function loadGraph() {

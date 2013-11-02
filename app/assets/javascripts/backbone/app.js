@@ -1,5 +1,4 @@
 // Control the include order of our backbone app js files
-
 //= require_tree ./models
 //= require_tree ./views
 //= require_tree ./routers
@@ -15,4 +14,5 @@ $(function() {
   mainPageLoad();
 
   $('#octocat').on('click', function() { animateMainExit(); });
+  $('#button').on('click', function() { changeDate(); });
 });

@@ -1,0 +1,13 @@
+	<!-- This will be our main container -->
+	<div id="main">
+	</div>
+
+	<div id='canvas'>
+		<h2>Yesterday's REPOS!</h2>
+		
+		<label>Select another day:</label>
+		<%= collection_select(:forkday, :forkday_id, @forks, :id, :date) %>
+		<%= submit_tag 'change date', { :id => 'button'} %>
+		<div id='container'>
+		</div>	
+	</div>
