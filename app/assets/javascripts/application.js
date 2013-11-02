@@ -20,15 +20,6 @@
 //= require d3
 //= require_tree .
 
-// function offset(div){
-//     $('body').animate({ scrollTop: div.top - 100 }, 700, "easeOutExpo");
-// }
-
-// $(function(){
-// 	$("#octocat").on('click', function(){
-// 		offset($('#canvas').offset());
-// 	});
-// });
 var data;
 
 function mainPageLoad() {
