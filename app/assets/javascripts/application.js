@@ -31,6 +31,24 @@
 // });
 var data;
 
+function mainPageLoad() {
+    $('.title').addClass('animated bounceInDown');
+    $('#octocat').addClass('animated bounceInLeft');
+}
+
+function animateMainExit() {
+    $('.title').addClass('animated bounceOutUp');
+    $('#octocat').addClass('animated bounceOutRight');
+    animateCanvasIn();
+}
+
+function animateCanvasIn() {
+    $('#canvas').addClass('animated bounceInDown');
+    $('#main').hide();
+    $('#canvas').show();
+    loadGraph();
+}
+
 function loadGraph() {
   $.getJSON("/get_fork_day/date", function(data) {
     var repos = data.repos;
