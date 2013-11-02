@@ -5,6 +5,7 @@ class Repo
   field :repo_url, type: String
   field :total_forks, type: Integer
   field :language, type: String
+  field :value, type: Integer
 
   embedded_in :fork_day
 end
