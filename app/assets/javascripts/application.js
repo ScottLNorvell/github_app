@@ -29,35 +29,52 @@
 // 		offset($('#canvas').offset());
 // 	});
 // });
+var data;
+
 function loadGraph() {
   $.getJSON("/get_fork_day/date", function(data) {
-    var array = data.repos
+    var repos = data.repos;
+    var HEIGHT = 500,
+        WIDTH = 1000,
+        format = d3.format(",d"),
+        color = d3.scale.category20b();
+
+    var bubble = d3.layout.pack()
+        .sort(null)
+        .size([WIDTH, HEIGHT])
+        .padding(1.5);
+
     var svg = d3.select("#container").append("svg")
-        .attr("width", 1000)
-        .attr("height", 500)
+        .attr("width", WIDTH)
+        .attr("height", HEIGHT)
+        .attr("class","bubble")
         .style("background", "white")
         .style("border", 'solid 5px grey');
+    
 
-    svg.selectAll("circle")
-      .data(array)
-      .enter()
-      .append("circle")
-      .attr('cy', function(d) {
-        return (d.total_forks / (Math.random() * 4)) % 500
-      })
-      .attr('cx', function(d){
-        return (d.total_forks / (Math.random() * 4)) % 1000
-      })
-      .attr('r', function(d){
-        return d.forked_today * 2
-      })
+    var node = svg.selectAll(".node")
+        .data(bubble.nodes({children: repos})
+        .filter(function(d) { return !d.children; }))
+      .enter().append("g")
+        .attr("class", "node")
+        // .transition()
+        // .duration(1000)
+        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
-      .attr('fill', function() { return '#'+Math.floor(Math.random()*16777215).toString(16) })
-      .append('text')
-      .text(function(d) {return d.name} )
-      .attr("dy", ".3em")
-          .style("text-anchor", "middle")
-          .style("color", "black");
+    node.append("title")
+        .text(function(d) { return d.name + ": " + d.language; });
+
+    node.append("circle")
+        // .transition()
+        // .duration(1000)
+        .attr("r", function(d) { return d.r; })
+        .style("fill", function(d) { return color(d.value); });
+
+    node.append("text")
+        .attr("dy", ".3em")
+        .style("text-anchor", "middle")
+        .text(function(d) { return d.name.substring(0, d.r / 4); });
+  
   });
 }
 

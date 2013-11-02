@@ -51,6 +51,7 @@ namespace :git_data do
 
 		results.each do |result|
 			repository = result[1]
+			repository[:value] = repository[:forked_today]
 			fork_day.repos << Repo.new(repository) 
 		end 
 

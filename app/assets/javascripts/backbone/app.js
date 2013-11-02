@@ -13,4 +13,6 @@ $(function() {
   // start our backbone history
   Backbone.history.start();
 
+  loadGraph();
+
 });
