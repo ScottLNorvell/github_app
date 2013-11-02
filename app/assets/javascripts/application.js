@@ -52,7 +52,7 @@ function loadGraph() {
         return d.forked_today * 2
       })
 
-      .attr('fill', 'purple')
+      .attr('fill', function() { return '#'+Math.floor(Math.random()*16777215).toString(16) })
       .append('text')
       .text(function(d) {return d.name} )
       .attr("dy", ".3em")
