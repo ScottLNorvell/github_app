@@ -9,7 +9,7 @@ app.Router = Backbone.Router.extend({
 
   initialize: function() {
     this.clicks = new app.ClickList([
-      new app.Click({url: '#canvas', image: 'assets/click.png'})
+      new app.Click({image: 'assets/click.png'})
     ]);
   },
     

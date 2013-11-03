@@ -20,16 +20,33 @@
 //= require d3
 //= require_tree .
 
-// function offset(div){
-//     $('body').animate({ scrollTop: div.top - 100 }, 700, "easeOutExpo");
-// }
+var data,
+    date; 
 
-// $(function(){
-// 	$("#octocat").on('click', function(){
-// 		offset($('#canvas').offset());
-// 	});
-// });
-var data;
+function mainPageLoad() {
+    $('.title').addClass('animated bounceInDown');
+    $('#octocat').addClass('animated bounceInLeft');
+}
+
+function animateMainExit() {
+    $('.title').addClass('animated bounceOutUp');
+    $('#octocat').addClass('animated bounceOutRight');
+    animateCanvasIn();
+}
+
+function animateCanvasIn() {
+    $('#canvas').addClass('animated bounceInDown');
+    $('#main').hide();
+    $('#canvas').show();
+    loadGraph();
+}
+
+function changeDate() {
+    // var date = $('select').val();
+    var newdate = new Date();
+    date = newdate.toLocaleDateString().split('/')[2] + '-' + newdate.toLocaleDateString().split('/')[0] + '-' + newdate.toLocaleDateString().split('/')[1];
+    animateCanvasIn();
+}
 
 function loadGraph() {
   $.getJSON("/get_fork_day/date", function(data) {
