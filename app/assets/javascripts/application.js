@@ -57,6 +57,7 @@ function loadGraph() {
         .filter(function(d) { return !d.children; }))
       .enter().append("g")
         .attr("class", "node")
+        // .attr("transform", function(d) { return "translate(" + WIDTH/2 + "," + HEIGHT/2 + ")"; })
         // .transition()
         // .duration(1000)
         .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
@@ -65,16 +66,29 @@ function loadGraph() {
         .text(function(d) { return d.name + ": " + d.language; });
 
     node.append("circle")
-        // .transition()
-        // .duration(1000)
-        .attr("r", function(d) { return d.r; })
-        .style("fill", function(d) { return color(d.value); });
+        .style("fill", function(d) { return color(d.value); })
+        .attr("r", 0)
+        .on('click', function(d) { window.location.href = d.repo_url })
+        // .on('mouseover', function(d) {  })
+        .transition()
+        .duration(1000)
+        .attr("r", function(d) { return d.r; });
 
     node.append("text")
         .attr("dy", ".3em")
         .style("text-anchor", "middle")
-        .text(function(d) { return d.name.substring(0, d.r / 4); });
-  
+        .text(function(d) { return d.name.substring(0, d.r / 4); })
+        .style("opacity", 0)
+        .transition()
+        .delay(500)
+        .style("opacity", 1)
+
+    node.selectAll(".node")
+        .transition()
+        .duration(1000)
+        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+
   });
 }
 
