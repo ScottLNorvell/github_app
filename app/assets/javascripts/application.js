@@ -20,8 +20,8 @@
 //= require d3
 //= require_tree .
 
-var data,
-    date; 
+var data;
+var date = $('select').val();
 
 function mainPageLoad() {
     $('.title').addClass('animated bounceInDown');
@@ -35,6 +35,7 @@ function animateMainExit() {
 }
 
 function animateCanvasIn() {
+    $('#container').empty();
     $('#canvas').addClass('animated bounceInDown');
     $('#main').hide();
     $('#canvas').show();
@@ -42,17 +43,16 @@ function animateCanvasIn() {
 }
 
 function changeDate() {
-    // var date = $('select').val();
-    var newdate = new Date();
-    date = newdate.toLocaleDateString().split('/')[2] + '-' + newdate.toLocaleDateString().split('/')[0] + '-' + newdate.toLocaleDateString().split('/')[1];
+    var date = $('select').val();
     animateCanvasIn();
 }
 
 function loadGraph() {
-  $.getJSON("/get_fork_day/date", function(data) {
+    var url = "/get_fork_day/" + date;
+  $.getJSON(url, function(data) {
     var repos = data.repos;
-    var HEIGHT = 500,
-        WIDTH = 1000,
+    var HEIGHT = 550,
+        WIDTH = 700,
         format = d3.format(",d"),
         color = d3.scale.category20b();
 
@@ -66,7 +66,7 @@ function loadGraph() {
         .attr("height", HEIGHT)
         .attr("class","bubble")
         .style("background", "white")
-        .style("border", 'solid 5px grey');
+        .style("border", 'solid 5px #030059');
     
 
     var node = svg.selectAll(".node")
@@ -76,8 +76,11 @@ function loadGraph() {
         .attr("class", "node")
         // .transition()
         // .duration(1000)
-        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-
+        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+        // .append("click", function(d) {
+            
+        // });
+    
     node.append("title")
         .text(function(d) { return d.name + ": " + d.language; });
 
