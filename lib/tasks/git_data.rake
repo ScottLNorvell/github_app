@@ -62,10 +62,10 @@ namespace :git_data do
 		24.times do |hour|
 			puts "opening yesterday (#{yesterday}) at #{hour}!"
 
-			# gz = File.open("/var/www/gh_data/#{yesterday}-#{hour}.json.gz")
-			gz = File.open("/var/www/gh_data/2013-11-02-#{hour}.json.gz")
+			gz = File.open("/var/www/gh_data/#{yesterday}-#{hour}.json.gz")
+			# gz = File.open("/var/www/gh_data/2013-11-02-#{hour}.json.gz")
 			js = Zlib::GzipReader.new(gz).read
-
+			gz.close
 			# parse event json and work with indiv events
 			Yajl::Parser.parse(js) do |event|
 			  	if event['type'] == 'ForkEvent'
