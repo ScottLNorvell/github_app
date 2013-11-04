@@ -100,6 +100,7 @@ function loadGraph() {
         .style("text-anchor", "middle")
         .text(function(d) { return d.name.substring(0, d.r / 4); })
         .style("opacity", 0)
+        .on('click', function(d) { window.location.href = d.repo_url })
         .transition()
         .delay(500)
         .style("opacity", 1)
