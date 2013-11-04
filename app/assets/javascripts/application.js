@@ -52,11 +52,12 @@ function loadGraph() {
     var url = "/get_fork_day/" + date;
   $.getJSON(url, function(data) {
     var repos = data.repos;
+    console.log(repos)
     var HEIGHT = 550,
         WIDTH = 700,
         format = d3.format(",d"),
         color = d3.scale.ordinal()  //.category20b();
-                .range(colorbrewer.BuGn[9])
+                .range(colorbrewer.Blues[9])
     var bubble = d3.layout.pack()
         .sort(null)
         .size([WIDTH, HEIGHT])
@@ -75,24 +76,19 @@ function loadGraph() {
         .filter(function(d) { return !d.children; }))
       .enter().append("g")
         .attr("class", "node")
-        // .attr("transform", function(d) { return "translate(" + WIDTH/2 + "," + HEIGHT/2 + ")"; })
-        // .transition()
-        // .duration(1000)
-        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-        // .append("click", function(d) {
-            
-        // });
+        .attr("transform", function(d) { return "translate(" + WIDTH/2 + "," + HEIGHT/2 + ")"; })
+        
     
     node.append("title")
         .text(function(d) { return d.name + ": " + d.language; });
 
     node.append("circle")
         .style("fill", function(d) { return color(d.value); })
-        .attr("r", 0)
+        // .attr("r", 0)
         .on('click', function(d) { window.location.href = d.repo_url })
         // .on('mouseover', function(d) {  })
-        .transition()
-        .duration(1000)
+        // .transition()
+        // .duration(1000)
         .attr("r", function(d) { return d.r; });
 
     node.append("text")
@@ -105,9 +101,10 @@ function loadGraph() {
         .delay(500)
         .style("opacity", 1)
 
-    node.selectAll(".node")
-        .transition()
+    node.transition()
+        .delay(500)
         .duration(1000)
+        .ease('elastic')
         .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
 
