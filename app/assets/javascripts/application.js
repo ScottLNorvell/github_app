@@ -18,6 +18,7 @@
 //= require backbone
 //= require backbone/app
 //= require d3
+//= require colorbrewer
 //= require_tree .
 
 var data;
@@ -54,8 +55,8 @@ function loadGraph() {
     var HEIGHT = 550,
         WIDTH = 700,
         format = d3.format(",d"),
-        color = d3.scale.category20b();
-
+        color = d3.scale.ordinal()  //.category20b();
+                .range(colorbrewer.BuGn[9])
     var bubble = d3.layout.pack()
         .sort(null)
         .size([WIDTH, HEIGHT])
