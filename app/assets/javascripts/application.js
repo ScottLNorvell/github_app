@@ -56,8 +56,13 @@ function loadGraph() {
     var HEIGHT = 550,
         WIDTH = 700,
         format = d3.format(",d"),
+<<<<<<< HEAD
         color = d3.scale.ordinal()  //.category20b();
                 .range(colorbrewer.Blues[9])
+=======
+        color = d3.scale.category20();
+                // .range(colorbrewer.Blues[9])
+>>>>>>> abcadf344351573b73cfa5af4227e9bde6c86fa9
     var bubble = d3.layout.pack()
         .sort(null)
         .size([WIDTH, HEIGHT])
