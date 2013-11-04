@@ -6,7 +6,7 @@
 		<h2>Yesterday's REPOS!</h2>
 		
 		<label>Select another day:</label>
-		<%= collection_select(:forkday, :forkday_id, @forks, :id, :date) %>
+		<%= collection_select(:forkday, :forkday_id, @forks, :date, :date) %>
 		<%= submit_tag 'change date', { :id => 'button'} %>
 		<div id='container'>
 		</div>	
