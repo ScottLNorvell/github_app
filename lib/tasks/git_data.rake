@@ -1,4 +1,4 @@
-gnamespace :git_data do
+namespace :git_data do
 
 	desc "Pull Yesterday's data from Github"
 	task :go_http => :environment do
